@@ -1,10 +1,12 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <TextCorrector />
+    <OllamaSetupGuide />
   </div>
 </template>
 
 <script setup>
+import OllamaSetupGuide from "./components/OllamaSetupGuide.vue";
 import TextCorrector from "./components/TextCorrector.vue";
 </script>
 

@@ -93,77 +93,111 @@
         </div>
 
         <!-- Barre d'actions -->
-        <div
-          class="p-4 flex justify-between items-center border-t border-gray-100 dark:border-gray-700"
-        >
-          <div class="flex items-center gap-2">
-            <button
-              v-for="style in correctionStyles"
-              :key="style.id"
-              @click="handleCorrection(style.id)"
-              :disabled="!text || isProcessing"
-              :class="[
-                'px-3 py-2 rounded-full font-medium text-sm flex items-center space-x-2 transition-all relative group',
-                !text || isProcessing
-                  ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
-                  : selectedStyle === style.id
-                  ? 'bg-blue-500 text-white shadow-sm hover:shadow active:scale-95'
-                  : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300',
-              ]"
-            >
-              <span class="text-lg">{{ style.icon }}</span>
-              <span class="hidden md:inline">{{ style.name }}</span>
+        <!-- Barre d'actions et styles -->
+        <div class="p-4 space-y-4 overflow-hidden">
+          <!-- Styles de correction en scrollable -->
+          <div class="relative">
+            <!-- Container de défilement avec padding pour les gradients -->
+            <div class="px-8">
+              <!-- Wrapper scrollable -->
+              <div class="flex overflow-x-auto gap-2 no-scrollbar pb-2">
+                <button
+                  v-for="style in correctionStyles"
+                  :key="style.id"
+                  @click="handleCorrection(style.id)"
+                  :disabled="!text || isProcessing"
+                  class="flex-none min-w-fit"
+                  :class="[
+                    'px-3 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition-all relative group',
+                    !text || isProcessing
+                      ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-not-allowed'
+                      : selectedStyle === style.id
+                      ? 'bg-blue-500 text-white shadow-sm hover:shadow active:scale-95'
+                      : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300',
+                  ]"
+                >
+                  <span class="text-lg">{{ style.icon }}</span>
+                  <span class="whitespace-nowrap text-sm">{{
+                    style.name
+                  }}</span>
 
-              <!-- Tooltip -->
-              <div
-                class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap"
-              >
-                {{ style.tooltip }}
+                  <!-- Tooltip -->
+                  <div
+                    class="hidden group-hover:block absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10"
+                  >
+                    {{ style.tooltip }}
+                  </div>
+                </button>
               </div>
-            </button>
+            </div>
+
+            <!-- Gradients de défilement -->
+            <div
+              class="absolute left-0 top-0 bottom-2 w-8 bg-gradient-to-r from-white dark:from-gray-900 to-transparent pointer-events-none"
+            ></div>
+            <div
+              class="absolute right-0 top-0 bottom-2 w-8 bg-gradient-to-l from-white dark:from-gray-900 to-transparent pointer-events-none"
+            ></div>
           </div>
 
-          <button
-            @click="handleCopy"
-            :disabled="!text"
-            :class="[
-              'p-2.5 rounded-full transition-all',
-              !text
-                ? 'text-gray-300 cursor-not-allowed'
-                : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 active:scale-95',
-            ]"
+          <!-- Barre d'actions -->
+          <div
+            class="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700"
           >
-            <template v-if="isCopied">
-              <svg
-                class="w-5 h-5 text-green-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </template>
-            <template v-else>
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M8 5a2 2 0 012 2h2a2 2 0 012-2M8 5a2 2 0 012-2h2a2 2 0 012 2"
-                />
-              </svg>
-            </template>
-          </button>
+            <!-- État de traitement -->
+            <div
+              v-if="isProcessing"
+              class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2"
+            >
+              <div
+                class="w-4 h-4 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin"
+              />
+              Correction en cours...
+            </div>
+
+            <!-- Bouton copier -->
+            <button
+              @click="handleCopy"
+              :disabled="!text"
+              :class="[
+                'p-2.5 rounded-full transition-all',
+                !text
+                  ? 'text-gray-300 cursor-not-allowed'
+                  : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 active:scale-95',
+              ]"
+            >
+              <template v-if="isCopied">
+                <svg
+                  class="w-5 h-5 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </template>
+              <template v-else>
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M8 5a2 2 0 012 2h2a2 2 0 012-2M8 5a2 2 0 012-2h2a2 2 0 012 2"
+                  />
+                </svg>
+              </template>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -370,44 +404,31 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-textarea {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+.scrollbar-thin::-webkit-scrollbar {
+  height: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .transition-all {
-    transition: all 0.3s ease;
-  }
-}
-
-/* Amélioration du focus des éléments interactifs */
-textarea:focus,
-button:focus {
-  outline: 2px solid rgb(59, 130, 246);
-  outline-offset: 2px;
-}
-
-/* Animation de scale au clic */
-.active\:scale-95:active {
-  transform: scale(0.95);
-}
-
-/* Style plus naturel du défilement */
-textarea {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
-}
-
-textarea::-webkit-scrollbar {
-  width: 6px;
-}
-
-textarea::-webkit-scrollbar-track {
+.scrollbar-thin::-webkit-scrollbar-track {
   background: transparent;
 }
 
-textarea::-webkit-scrollbar-thumb {
-  background-color: rgba(156, 163, 175, 0.5);
-  border-radius: 3px;
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgb(209, 213, 219);
+  border-radius: 2px;
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgb(75, 85, 99);
+}
+
+/* Masquer la scrollbar sur mobile tout en gardant la fonctionnalité */
+@media (max-width: 640px) {
+  .scrollbar-thin {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>
