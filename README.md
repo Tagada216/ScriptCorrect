@@ -1,7 +1,7 @@
 # Script Correct
 
 <p align="center">
-  <img src="assets/logo.svg" width="150" height="150" alt="ScriptCorrect Logo">
+  <img src="https://github.com/user-attachments/assets/208a6219-e4ec-4b1f-be00-6049298458d3" width="150" height="150" alt="ScriptCorrect Logo">
 </p>
 
 > Un assistant de correction intelligent qui va au-delà de l'orthographe pour s'adapter à votre contexte d'écriture.
