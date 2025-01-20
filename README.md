@@ -6,6 +6,39 @@
 
 > Un assistant de correction intelligent qui va au-delà de l'orthographe pour s'adapter à votre contexte d'écriture.
 
+## À propos
+
+ScriptCorrect est une application de correction de texte intelligente qui permet non seulement de corriger l'orthographe et la grammaire, mais aussi d'adapter le style d'écriture selon vos besoins.
+
+## Technologies utilisées
+
+- 🖥️ [Tauri](https://tauri.app/) - Framework desktop multiplateforme
+- ⚡ [Vue.js 3](https://vuejs.org/) - Framework frontend moderne
+- 🎨 [Tailwind CSS](https://tailwindcss.com/) - Framework CSS utilitaire
+- 🤖 [Ollama](https://ollama.ai/) - IA locale pour le traitement du texte
+
+## Fonctionnalités
+
+- 🔍 Correction orthographique et grammaticale
+- 🎯 Plusieurs styles de correction disponibles :
+  - Standard
+  - Formel
+  - Décontracté
+  - Créatif
+  - Académique
+  - Business
+  - Journalistique
+  - Technique
+- ✨ Interface simple et intuitive
+- 🌙 Mode sombre/clair
+- 📋 Copie automatique dans le presse-papiers
+
+## Prérequis
+
+- [Node.js](https://nodejs.org/)
+- [Rust](https://www.rust-lang.org/) (pour Tauri)
+- [Ollama](https://ollama.ai/)
+
 # Installation
 
 ## Windows
@@ -55,4 +88,14 @@ ollama pull llama3.2
 curl -fsSL https://ollama.ai/install.sh | sh
 ollama serve
 ollama pull llama3.2
+```
+
+## Clonez le dépôt
+
+```bash
+git clone https://github.com/votre-username/scriptcorrect.git
+cd scriptcorrect
+npm install
+npm run tauri dev
+npm run tauri build
 ```
