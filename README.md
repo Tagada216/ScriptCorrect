@@ -1,5 +1,11 @@
 # Script Correct
 
+<p align="center">
+  <img src="assets/logo.svg" width="150" height="150" alt="ScriptCorrect Logo">
+</p>
+
+> Un assistant de correction intelligent qui va au-delà de l'orthographe pour s'adapter à votre contexte d'écriture.
+
 # Installation
 
 ## Windows

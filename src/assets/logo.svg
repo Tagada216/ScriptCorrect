@@ -1,0 +1,39 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradientBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Effet brillant -->
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:white;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Fond -->
+  <circle cx="100" cy="100" r="90" fill="url(#gradientBg)" />
+  
+  <!-- Symbole de la plume/crayon -->
+  <g transform="translate(100,100) rotate(-45) translate(-100,-100)">
+    <!-- Corps principal -->
+    <path d="
+      M120 60
+      L80 140
+      C78 144, 82 148, 86 146
+      L166 106
+      C170 104, 170 98, 166 96
+      L86 56
+      C82 54, 78 58, 80 62
+      L120 140
+    " 
+    fill="white" />
+    
+    <!-- Point lumineux -->
+    <circle cx="123" cy="100" r="4" fill="#3B82F6"/>
+  </g>
+
+  <!-- Effet de brillance -->
+  <circle cx="70" cy="70" r="60" fill="url(#shine)" />
+</svg>
